@@ -60,6 +60,10 @@
           value="Sign in"
         />
       </div>
+      <div class="register-container">
+        <p>Don't have an account?</p>
+        <router-link to="/register">Register</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -245,6 +249,23 @@ const handleSubmit = async () => {
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+  }
+
+  .register-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+
+    p {
+      margin-right: 5px;
+    }
+
+    a {
+      color: rgb(80, 80, 251);
+      font-weight: 600;
     }
   }
 }

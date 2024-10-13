@@ -1,9 +1,7 @@
-import { useAuthenticate } from "@/lib/services/authentication";
 import {
   silentAuth,
   useAuth,
 } from "@/lib/services/authentication/authentication";
-import { computed } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
