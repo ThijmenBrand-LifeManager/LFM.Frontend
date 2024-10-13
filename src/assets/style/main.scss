@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "open-sans";
+  src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
+}
+
+body {
+  margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  font-family: "open-sans", sans-serif;
+}
