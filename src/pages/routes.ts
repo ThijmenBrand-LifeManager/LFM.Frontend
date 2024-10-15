@@ -1,37 +1,36 @@
-import {
-  silentAuth,
-  useAuth,
-} from "@/lib/services/authentication/authentication";
-import { createRouter, createWebHistory } from "vue-router";
+import { homeRoutes } from "@/pages/home/routes";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-const routes = [
+export const routeNames = {
+  LOGIN: "Login",
+  DASHBOARD: "Dashboard",
+};
+
+const routes: RouteRecordRaw[] = [
   {
     path: "/login",
     name: "Login",
     component: () => import("./auth/LoginView.vue"),
+    meta: { auth: false },
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("./auth/RegisterView.vue"),
+    meta: { auth: false },
   },
   {
     path: "/",
-    name: "Dashboard",
-    component: () => import("./dashboard/DashboardView.vue"),
-    meta: { requiresAuth: true },
+    name: "Home",
+    component: () => import("./home/index.vue"),
+    meta: { auth: true },
+    children: [...homeRoutes],
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-});
-
-router.beforeEach(async (to, _, next) => {
-  await silentAuth();
-
-  const user = useAuth().user;
-  console.log("user", user?.value);
-
-  if (to.meta.requiresAuth && !user?.value) next({ name: "Login" });
-  else if (to.name === "Login" && user?.value) next({ name: "Dashboard" });
-  else next();
 });
 
 export default router;

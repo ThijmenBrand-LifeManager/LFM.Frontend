@@ -11,8 +11,8 @@
             width="100"
             src="/logo.webp"
           />
-          <h2>Welcome back</h2>
-          <p>Please enter your details to sign in</p>
+          <h2>Register to LifeManager</h2>
+          <p>Please fill out the requested information.</p>
         </div>
       </div>
       <div class="sso-login-container">
@@ -45,55 +45,51 @@
           />
         </span>
         <span>
+          <label for="email">Username</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="choose a username..."
+            v-model="username"
+          />
+        </span>
+        <span>
           <label for="password">Password</label>
           <input
             @keyup.enter="handleSubmit"
             type="password"
             id="password"
             v-model="password"
-            placeholder="enter your password..."
+            placeholder="create a password"
           />
         </span>
         <input
           @click="handleSubmit"
           type="submit"
           id="submit"
-          value="Sign in"
+          value="Register!"
         />
       </div>
       <div class="register-container">
-        <p>Don't have an account?</p>
-        <router-link to="/register">Register</router-link>
+        <p>Already an account?</p>
+        <router-link to="/login">Login</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { routeNames } from "@/pages/routes";
 import { ref } from "vue";
 import { useAuth } from "vue-auth3";
 
 const auth = useAuth();
 
 const email = ref("");
+const username = ref("");
 const password = ref("");
 
 const handleSubmit = async () => {
-  auth.login({
-    data: {
-      email: email.value,
-      password: password.value,
-    },
-    body: {
-      email: email.value,
-      password: password.value,
-    },
-    redirect: { name: routeNames.DASHBOARD },
-    remember: true,
-    staySignedIn: true,
-    fetchUser: true,
-  });
+  alert("Unfortunatly, this feature is not yet implemented.");
 };
 </script>
 

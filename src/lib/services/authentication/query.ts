@@ -1,18 +1,14 @@
 import { QueryClient, useQuery } from "@tanstack/vue-query";
 import { User } from "./models/userModel";
+import { useMeRequest } from "../api/authorization";
 
-export const useGetUser = (token: string, client?: QueryClient) =>
+export const useGetUser = (client?: QueryClient) =>
   useQuery(
     {
       queryKey: ["user"],
       queryFn: async (): Promise<User> => {
-        const response = await fetch("http://localhost:5001/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        return response.json();
+        const response = await useMeRequest();
+        return response.data;
       },
     },
     client

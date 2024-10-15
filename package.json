@@ -14,6 +14,7 @@
     "@types/node": "^22.7.5",
     "axios": "^1.7.7",
     "vue": "^3.4.37",
+    "vue-auth3": "^1.0.11",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
