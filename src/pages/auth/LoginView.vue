@@ -35,31 +35,20 @@
         <hr />
       </span>
       <div class="credentials-container">
-        <span>
-          <label for="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="enter your email..."
-            v-model="email"
-          />
-        </span>
-        <span>
-          <label for="password">Password</label>
-          <input
-            @keyup.enter="handleSubmit"
-            type="password"
-            id="password"
+        <IftaLabel>
+          <InputText id="username" v-model="email" variant="outlined" />
+          <label for="username">Email address</label>
+        </IftaLabel>
+        <IftaLabel>
+          <InputText
             v-model="password"
-            placeholder="enter your password..."
+            inputId="password"
+            variant="outlined"
+            type="password"
           />
-        </span>
-        <input
-          @click="handleSubmit"
-          type="submit"
-          id="submit"
-          value="Sign in"
-        />
+          <label for="password">Password</label>
+        </IftaLabel>
+        <Button @click="handleSubmit" label="Sign in" />
       </div>
       <div class="register-container">
         <p>Don't have an account?</p>
@@ -71,6 +60,7 @@
 
 <script setup lang="ts">
 import { routeNames } from "@/pages/routes";
+import InputText from "primevue/inputtext";
 import { ref } from "vue";
 import { useAuth } from "vue-auth3";
 
@@ -226,35 +216,16 @@ const handleSubmit = async () => {
     width: 70%;
 
     span {
-      display: flex;
-      flex-direction: column;
-      margin: 10px;
       width: 100%;
-
-      label {
-        font-size: 0.8rem;
-        margin-bottom: 5px;
-        font-weight: 500;
-      }
-
-      input {
-        height: 2pc;
-        padding: 0.5em;
-        border: 1.5px solid #ccc;
-        border-radius: 5px;
-      }
+      margin: 0.5em 0;
     }
 
-    input[type="submit"] {
+    .p-inputtext {
       width: 100%;
-      height: 2pc;
-      margin: 10px;
-      background-color: rgb(80, 80, 251);
-      color: white;
-      font-weight: 600;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    }
+
+    .p-button {
+      width: 100%;
     }
   }
 

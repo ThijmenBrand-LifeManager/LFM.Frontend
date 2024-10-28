@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import SideNav from "@/components/navigation/SideNav.vue";
-import TopNav from "@/components/navigation/TopNav.vue";
+import SideNav from "@/shared/components/navigation/SideNav.vue";
+import TopNav from "@/shared/components/navigation/TopNav.vue";
 import { User } from "@/lib/services/authentication/models/userModel";
 import { useAuth } from "vue-auth3";
 

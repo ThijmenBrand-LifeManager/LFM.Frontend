@@ -1,12 +1,17 @@
 <template>
+  <WorkstreamDrawer
+    :show="showWorkstreamDrawer"
+    @update:show="showWorkstreamDrawer = $event"
+    @create="handleCreate"
+  />
   <section>
     <div class="title-section">
-      <h1>Workstreams</h1>
-      <button>
-        <router-link to="/home/workstreams/create"
-          >Create Workstream</router-link
-        >
-      </button>
+      <h1>{{ $t("workstreams.title") }}</h1>
+      <Button
+        @click="showWorkstreamDrawer = true"
+        icon="pi pi-plus"
+        :label="$t('workstreams.addWorkstream.title')"
+      />
     </div>
     <div class="workstream-status-selection">
       <span class="view-mode">
@@ -34,19 +39,51 @@
 </template>
 
 <script setup lang="ts">
+import CreateWorkstreamModel from "@/lib/models/workstream/CreateWorkstream";
 import WorkstreamCard from "./components/WorkstreamCard.vue";
+import WorkstreamDrawer from "./components/workstreamDrawer/WorkstreamDrawer.vue";
 
 import { useListWorkstreams } from "@/lib/services/workstream/query";
+import Button from "primevue/button";
 import { reactive, ref } from "vue";
+import { useCreateWorkstream } from "@/lib/services/workstream/mutations";
+import { WorkstreamState } from "@/lib/models/workstream/WorkstreamState";
+import { useAuth } from "vue-auth3";
 
 const workstreams = reactive(useListWorkstreams());
 
+const createWorkstream = useCreateWorkstream();
+console.log(useAuth());
+
+const handleCreate = (values: CreateWorkstreamModel) => {
+  console.log("Running create");
+  createWorkstream.mutate(
+    {
+      name: values.workstreamTitle,
+      description: values.workstreamDescription,
+      startDate: values.workstreamStartDate,
+      state: WorkstreamState.NotStarted,
+    },
+    {
+      onSuccess: () => {
+        showWorkstreamDrawer.value = false;
+        console.log("Workstream created successfully");
+      },
+    }
+  );
+};
+
 const activeWorkstreams = ref([]);
 const completedWorkstreams = ref([]);
+const showWorkstreamDrawer = ref(false);
 </script>
 
 <style lang="scss">
 $menu-border-width: 2px;
+
+.p-drawer-right .p-drawer.lfm-drawer {
+  width: 40rem;
+}
 
 .title-section {
   display: flex;
@@ -57,20 +94,6 @@ $menu-border-width: 2px;
   h1 {
     font-size: 1.5rem;
     font-weight: 500;
-  }
-
-  button {
-    background-color: $primary-application-color;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-
-    a {
-      color: white;
-      text-decoration: none;
-    }
   }
 }
 

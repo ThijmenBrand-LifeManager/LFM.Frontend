@@ -13,12 +13,13 @@ const createBaseClient = (baseUrl: string, token: string | null) => {
 
 export function createAuthorizationApi() {
   const baseUrl = import.meta.env.VITE_AUTH_API_URL;
+  console.log(useAuth());
   const token = useAuth().token();
   return createBaseClient(baseUrl, token);
 }
 
 export function createWorkstreamApi() {
   const baseUrl = import.meta.env.VITE_WORKSTREAM_API_URL;
-  const token = useAuth().token();
-  return createBaseClient(baseUrl, token);
+  const localToken = localStorage.getItem("auth_token_default");
+  return createBaseClient(baseUrl, localToken?.replace(/"/g, "")!);
 }

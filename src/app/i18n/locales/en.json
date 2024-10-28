@@ -1,0 +1,47 @@
+{
+    "general": {
+        "loading": "Loading...",
+        "create": "Create",
+        "reviewAndCreate": "Review + Create",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "close": "Close",
+        "next": "Next",
+        "back": "Back"
+    },
+    "nav": {
+        "title": "LifeManager",
+        "home": "Home",
+        "dashboard": "Dashboard",
+        "workstreams": "Workstreams",
+        "projects": "Projects",
+        "settings": "Settings"
+    },
+    "dashboard": {
+        "title": "Dashboard"
+    },
+    "workstreams": {
+        "title": "Workstreams",
+        "addWorkstream": {
+            "steps": {
+                "step1": "General",
+                "step2": "Projects",
+                "step3": "Members"
+            },
+            "requiredFields": "Fields with * are required",
+            "title": "Create new workstream",
+            "workstreamInformation": {
+                "title": "Workstream information",
+                "workstreamTitle" : "Workstream title",
+                "workstreamDescription" : "Workstream description",
+                "startDate": "Workstream start date",
+                "startDateError": "Workstream start must be in the future!"
+            }   
+        }
+    },
+    "validation": {
+        "field-is-required": "This field is required"
+    }
+}

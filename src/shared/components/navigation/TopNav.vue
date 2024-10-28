@@ -12,9 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import BreadCrumbs from "@/components/navigation/BreadCrumbs.vue";
-
-import { defineProps } from "vue";
+import BreadCrumbs from "@/shared/components/navigation/BreadCrumbs.vue";
 
 const props = defineProps<{
   username: string;
