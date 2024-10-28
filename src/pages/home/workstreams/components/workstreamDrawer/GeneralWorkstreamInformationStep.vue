@@ -84,7 +84,9 @@ const handleCreate = async () => {
   emits("action:create", props.workstreamValues);
 };
 
-const handleNext = () => {
-  console.log("next");
+const handleNext = async () => {
+  if (!(await v$.value.$validate())) return;
+
+  emits("action:next");
 };
 </script>

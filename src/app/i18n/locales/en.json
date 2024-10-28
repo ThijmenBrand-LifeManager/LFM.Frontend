@@ -28,7 +28,8 @@
             "steps": {
                 "step1": "General",
                 "step2": "Projects",
-                "step3": "Members"
+                "step3": "Members",
+                "step4": "Review"
             },
             "requiredFields": "Fields with * are required",
             "title": "Create new workstream",
@@ -38,7 +39,16 @@
                 "workstreamDescription" : "Workstream description",
                 "startDate": "Workstream start date",
                 "startDateError": "Workstream start must be in the future!"
-            }   
+            },
+            "workstreamProjects": {
+                "title": "Add projects to your workstream"
+            },
+            "workstreamMembers": {
+                "title": "Add members to your workstream"
+            },
+            "review": {
+                "title": "Review your workstream"
+            }
         }
     },
     "validation": {
