@@ -2,7 +2,7 @@
   <div class="top-nav-container">
     <span class="right-content">
       <router-link to="/account" class="account-section">
-        <img src="@/assets/icons/account.svg" alt="logo" />
+        <Avatar label="P" class="mr-2" size="large" />
         <p>{{ props.username }}</p>
       </router-link>
     </span>
@@ -39,11 +39,6 @@ const props = defineProps<{
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    img {
-      width: 30px;
-      height: 30px;
-    }
 
     span {
       color: $text-color-primary;

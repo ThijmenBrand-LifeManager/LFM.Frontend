@@ -13,34 +13,26 @@
         :label="$t('workstreams.addWorkstream.title')"
       />
     </div>
-    <div class="workstream-status-selection">
-      <span class="view-mode">
-        <p>Active workstreams</p>
-        <p class="amount">{{ activeWorkstreams.length }}</p>
-      </span>
-      <span class="view-mode">
-        <p>Completed workstreams</p>
-        <p class="amount">{{ completedWorkstreams.length }}</p>
-      </span>
-      <span class="view-mode">
-        <p>All workstreams</p>
-        <p class="amount">{{ workstreams.data?.length }}</p>
-      </span>
-    </div>
-    <span v-if="workstreams.isLoading">Loading...</span>
-    <div class="workstreams-container">
-      <WorkstreamCard
-        v-for="workstream in workstreams.data"
-        :key="workstream.id"
-        :workstream="workstream"
-      />
-    </div>
+    <Tabs value="0">
+      <TabList>
+        <Tab v-for="tab in workstreamTabs" :key="tab.title" :value="tab.id">{{
+          tab.title
+        }}</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel v-for="tab in workstreamTabs" :key="tab.id" :value="tab.id">
+          <WorkstreamFilterTab
+            :workstreams="workstreams.data"
+            :filter="tab.filter"
+          />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
   </section>
 </template>
 
 <script setup lang="ts">
 import CreateWorkstreamModel from "@/lib/models/workstream/CreateWorkstream";
-import WorkstreamCard from "./components/WorkstreamCard.vue";
 import WorkstreamDrawer from "./components/workstreamDrawer/WorkstreamDrawer.vue";
 
 import { useListWorkstreams } from "@/lib/services/workstream/query";
@@ -49,8 +41,15 @@ import { reactive, ref } from "vue";
 import { useCreateWorkstream } from "@/lib/services/workstream/mutations";
 import { WorkstreamState } from "@/lib/models/workstream/WorkstreamState";
 import { useAuth } from "vue-auth3";
+import WorkstreamFilterTab from "@/pages/home/workstreams/components/WorkstreamFilterTab.vue";
 
 const workstreams = reactive(useListWorkstreams());
+
+const workstreamTabs = [
+  { id: "0", title: "Active", filter: WorkstreamState.InProgress },
+  { id: "1", title: "Completed", filter: WorkstreamState.Stopped },
+  { id: "2", title: "All", filter: null },
+];
 
 const createWorkstream = useCreateWorkstream();
 console.log(useAuth());

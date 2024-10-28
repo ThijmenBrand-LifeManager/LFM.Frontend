@@ -1,6 +1,10 @@
+import { WorkstreamState } from "@/lib/models/workstream/WorkstreamState";
+
 export type Workstream = {
   id: string;
   name: string;
   description: string;
-  created_at: string;
+  state: WorkstreamState;
+  startDate: Date;
+  createdAt: string;
 };
