@@ -19,16 +19,28 @@
       </span>
       <span class="view-mode">
         <p>All workstreams</p>
-        <p class="amount">{{ workstreams.length }}</p>
+        <p class="amount">{{ workstreams.data?.length }}</p>
       </span>
+    </div>
+    <span v-if="workstreams.isLoading">Loading...</span>
+    <div class="workstreams-container">
+      <WorkstreamCard
+        v-for="workstream in workstreams.data"
+        :key="workstream.id"
+        :workstream="workstream"
+      />
     </div>
   </section>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import WorkstreamCard from "./components/WorkstreamCard.vue";
 
-const workstreams = ref([]);
+import { useListWorkstreams } from "@/lib/services/workstream/query";
+import { reactive, ref } from "vue";
+
+const workstreams = reactive(useListWorkstreams());
+
 const activeWorkstreams = ref([]);
 const completedWorkstreams = ref([]);
 </script>
@@ -65,7 +77,7 @@ $menu-border-width: 2px;
 .workstream-status-selection {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   .view-mode {
     display: flex;
@@ -93,5 +105,11 @@ $menu-border-width: 2px;
       margin: 0rem 0.2rem;
     }
   }
+}
+
+.workstreams-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+  gap: 1rem;
 }
 </style>

@@ -80,9 +80,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useAuth } from "vue-auth3";
-
-const auth = useAuth();
 
 const email = ref("");
 const username = ref("");

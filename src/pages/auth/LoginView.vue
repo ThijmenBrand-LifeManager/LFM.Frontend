@@ -126,6 +126,7 @@ const handleSubmit = async () => {
       grid-row-start: 1;
       grid-column-start: 1;
       width: 28em;
+      height: 10em;
     }
 
     .layer0 {

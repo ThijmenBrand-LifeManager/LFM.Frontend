@@ -1,14 +1,24 @@
-import { Axios } from "axios";
+import axios from "axios";
+import { useAuth } from "vue-auth3";
 
-class BaseApi extends Axios {
-  constructor(baseUrl: string) {
-    super({
-      baseURL: baseUrl,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
+const createBaseClient = (baseUrl: string, token: string | null) => {
+  return axios.create({
+    baseURL: baseUrl,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  });
+};
+
+export function createAuthorizationApi() {
+  const baseUrl = import.meta.env.VITE_AUTH_API_URL;
+  const token = useAuth().token();
+  return createBaseClient(baseUrl, token);
 }
 
-export default BaseApi;
+export function createWorkstreamApi() {
+  const baseUrl = import.meta.env.VITE_WORKSTREAM_API_URL;
+  const token = useAuth().token();
+  return createBaseClient(baseUrl, token);
+}
