@@ -21,7 +21,7 @@
     "primevue": "^4.1.1",
     "vue": "^3.4.37",
     "vue-auth3": "^1.0.11",
-    "vue-i18n": "^9.14.1",
+    "vue-i18n": "^9.14.2",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
